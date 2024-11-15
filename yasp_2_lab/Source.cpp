@@ -25,10 +25,13 @@ void menu() {
             << "4. Ввод даты из файла\n"
             << "5. Сохранить дату в файл\n"
             << "6. Вывести дату на экран\n"
-            << "7. Сложить дни с датой\n"
-            << "8. Вычесть дни из даты\n"
-            << "9. Проверить високосность года\n"
-            << "10. Сравнить даты\n"
+            << "7. Вывести день из даты на экран\n"
+            << "8. Вывести месяц из даты на экран\n"
+            << "9. Вывести год из даты на экран\n"
+            << "10. Сложить дни с датой\n"
+            << "11. Вычесть дни из даты\n"
+            << "12. Проверить високосность года\n"
+            << "13. Сравнить даты\n"
             << "0. Выход\n";
 
         while (true) {
@@ -113,7 +116,17 @@ void menu() {
         case 6:
             std::cout << "Текущая дата: " << current_date << '\n';
             break;
-        case 7: {
+        case 7:
+            std::cout << "День в дате: " << current_date.get_day() << std::endl;
+            break;
+        case 8:
+            std::cout << "Mесяц в дате: " << current_date.get_month() << std::endl;
+            break;
+        case 9:
+            std::cout << "Год в дате: " << current_date.get_year() << std::endl;
+            break;
+
+        case 10: {
             int days_to_add;
             std::cout << "Введите количество дней для добавления: ";
             std::cin >> days_to_add;
@@ -121,7 +134,7 @@ void menu() {
             std::cout << "Новая дата: " << current_date << '\n';
             break;
         }
-        case 8: {
+        case 11: {
             int days_to_subtract;
             std::cout << "Введите количество дней для вычитания: ";
             std::cin >> days_to_subtract;
@@ -129,7 +142,7 @@ void menu() {
             std::cout << "Новая дата: " << current_date << '\n';
             break;
         }
-        case 9: {
+        case 12: {
             if (current_date.is_leap_year()) {
                 std::cout << "Год " << current_date.get_year() << " является високосным.\n";
             }
@@ -138,7 +151,7 @@ void menu() {
             }
             break;
         }
-        case 10: {
+        case 13: {
             std::string compare_date_str;
             std::cout << "Введите дату для сравнения (дд.мм.гггг): ";
             std::cin >> compare_date_str;
