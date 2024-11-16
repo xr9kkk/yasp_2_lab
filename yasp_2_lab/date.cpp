@@ -73,22 +73,26 @@ Date Date::operator-(int days) const {
     return result;
 }
 
+int Date::operator-(Date& other) const
+{
+    return (days_between(other));
+}
+
 int Date::days_between(const Date& other) const {
     if (!is_initialized || !other.is_initialized) {
         std::cerr << "Ошибка: одна из дат не инициализирована.\n";
         return 0;
     }
-
     Date start = *this;
     Date end = other;
-
     if (start > end) std::swap(start, end);
-
     int total_days = 0;
-    while (start < end) {
+
+    while (start.get_day() != end.get_day() || start.get_month() != end.get_month() || start.get_year() != end.get_year()) {
         start.add_days(1);
-        total_days++;
+        total_days++; 
     }
+
     return total_days;
 }
 
@@ -105,14 +109,37 @@ void Date::add_days(int days) {
             days = 0;
         }
         else {
-            days -= (days_in_month - day + 1);
-            day = 1;
-            if (++month > 12) {
+            days -= (days_in_month - day + 1); 
+            day = 1; 
+            if (++month > 12) { 
                 month = 1;
                 ++year;
             }
         }
     }
+}
+
+bool Date::operator<(const Date& other) const {
+    return (this->operator<=>(other)) == std::strong_ordering::less;
+}
+
+bool Date::operator>(const Date& other) const {
+    return (this->operator<=>(other)) == std::strong_ordering::greater;
+}
+
+bool Date::operator==(const Date& other) const {
+    return (this->operator<=>(other)) == std::strong_ordering::equal;
+}
+
+bool Date::operator!=(const Date& other) const {
+    return !(this->operator==(other));
+}
+
+
+std::strong_ordering Date::operator<=>(const Date& other) const {
+    if (year != other.year) return year <=> other.year;
+    if (month != other.month) return month <=> other.month;
+    return day <=> other.day;
 }
 
 void Date::subtract_days(int days) {

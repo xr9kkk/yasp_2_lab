@@ -12,6 +12,8 @@ private:
     unsigned short month;
     unsigned short year;
 
+    bool is_initialized; 
+
     // Проверка, является ли год високосным
     bool is_leap_year(unsigned short year) const;
     bool is_valid_date(unsigned short day, unsigned short month, unsigned short year) const;
@@ -19,7 +21,6 @@ private:
 
 
 public:
-    bool is_initialized;
     Date(unsigned short d = 1, unsigned short m = 1, unsigned short y = 2000);
     Date(const std::string& date_str);
     Date(std::chrono::year year, std::chrono::month month, std::chrono::day day);
@@ -29,8 +30,14 @@ public:
 
     Date operator+(int days) const;
     Date operator-(int days) const;
+    int operator-(Date& other) const;
 
-    auto operator<=>(const Date& other) const = default;
+    bool operator<(const Date& other) const;
+    bool operator>(const Date& other) const;
+    bool operator==(const Date& other) const;
+    bool operator!=(const Date& other) const;
+
+    std::strong_ordering operator<=>(const Date& other) const;
 
     unsigned short get_day() const noexcept { return day; }
     unsigned short get_month() const noexcept { return month; }
