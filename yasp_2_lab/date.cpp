@@ -119,13 +119,13 @@ void Date::add_days(int days) {
     }
 }
 
-bool Date::operator<(const Date& other) const {
+/*bool Date::operator<(const Date& other) const {
     return (this->operator<=>(other)) == std::strong_ordering::less;
 }
 
 bool Date::operator>(const Date& other) const {
     return (this->operator<=>(other)) == std::strong_ordering::greater;
-}
+}*/
 
 bool Date::operator==(const Date& other) const {
     return (this->operator<=>(other)) == std::strong_ordering::equal;

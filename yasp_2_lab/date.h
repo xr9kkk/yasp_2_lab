@@ -32,8 +32,8 @@ public:
     Date operator-(int days) const;
     int operator-(Date& other) const;
 
-    bool operator<(const Date& other) const;
-    bool operator>(const Date& other) const;
+    //bool operator<(const Date& other) const;
+    //bool operator>(const Date& other) const;
     bool operator==(const Date& other) const;
     bool operator!=(const Date& other) const;
 
